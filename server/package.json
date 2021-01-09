@@ -1,0 +1,30 @@
+{
+	"name": "lyrieek-go-server",
+	"version": "0.1.0",
+	"private": true,
+	"bin": "app.js",
+	"scripts": {
+		"predev": "tsc app.ts",
+		"dev": "node app.js",
+		"prebuild": "tsc app.ts",
+		"build": "pkg . --out-path=dist/ && echo ./dist/lyrieek-go-server.exe"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"express-ws": "^4.0.0"
+	},
+	"pkg": {
+		"options": [
+			"experimental-modules"
+		],
+		"scripts": [
+			"./app.js"
+		],
+		"assets": [
+			"../dist"
+		],
+		"targets": [
+			"node14-win-x64"
+		]
+	}
+}

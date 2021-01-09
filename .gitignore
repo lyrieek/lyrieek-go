@@ -1,0 +1,10 @@
+node_modules
+/dist
+.vscode
+*.log
+.DS_Store
+
+# auto generate
+server/app.js
+package-lock.json
+yarn.lock
