@@ -1,5 +1,5 @@
 // const postPrefix = "/"
-const postPrefix = "//localhost:1234/"
+const postPrefix = "//localhost:1212/"
 
 const _fetch = (url, data, successFn) => {
     if (typeof data === 'function') {
@@ -16,7 +16,5 @@ const _fetch = (url, data, successFn) => {
     }))
 }
 export default {
-	pull(e) {
-		_fetch('chressData', e)
-	}
+    fetch: _fetch
 }

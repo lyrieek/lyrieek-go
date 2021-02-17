@@ -3,12 +3,13 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "vue-cli-service serve",
+		"dev": "npx --max_old_space_size=4095 vue-cli-service serve",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint"
 	},
 	"dependencies": {
 		"balm-ui": "^8.15.0",
+		"chinese-random-name": "^1.0.0",
 		"core-js": "^3.6.5",
 		"d3": "^6.3.1",
 		"vue": "^2.6.11"

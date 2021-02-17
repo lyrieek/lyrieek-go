@@ -9,7 +9,7 @@ app.listen(1234)
 console.log("http://localhost:1234/");
 
 const userList = []
-const chressData = []
+const chessData = []
 
 app.use(express.static('../dist'))
 
@@ -26,11 +26,11 @@ app.get('/', function (req: any, res: any) {
 })
 
 app.get('/clear', function (req: any, res: any) {
-	chressData.length = 0
+	chessData.length = 0
 })
 
-app.post('/chressData', function (req: any, res: any) {
-	res.send(JSON.stringify(chressData))
+app.post('/chessData', function (req: any, res: any) {
+	res.send(JSON.stringify(chessData))
 })
 
 const _wss = getWss('/')
@@ -38,13 +38,13 @@ app.ws('/', function (ws: any, req: any) {
 	ws.on('message', function (msg: any) {
 		const data = JSON.parse(msg);
 		if (data.clear) {
-			chressData.length = 0
+			chessData.length = 0
 			_wss.clients.forEach((client) => client.send(JSON.stringify({
 				clear: true
 			})));
 			return
 		}
-		chressData.push(data)
+		chessData.push(data)
 		_wss.clients.forEach((client) => {
 			client.send(JSON.stringify(data))
 		});

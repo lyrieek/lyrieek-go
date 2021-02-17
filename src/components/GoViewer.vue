@@ -2,21 +2,24 @@
 	<div>
 		<div id="container"></div>
 		<Toolbar v-bind:currentRole="currentRole" v-bind:chessPieces="chessPieces" v-bind:svg="svg" @editing="changeEditing" />
-		<SocketBar v-bind:userName="'u'+Math.round(Math.random()*0xfff)" />
+		<SocketBar />
+		<UserList />
 	</div>
 </template>
 
 <script>
 import * as d3 from 'd3'
-import dataProcess from '../services/dataProcess'
+// import dataProcess from '../services/dataProcess'
 import Toolbar from './Toolbar.vue'
 import SocketBar from './SocketBar.vue'
+import UserList from './UserList.vue'
 
 export default {
 	name: 'GoViewer',
 	components: {
 		Toolbar,
 		SocketBar,
+		UserList,
 	},
 	data() {
 		return {
@@ -172,17 +175,26 @@ export default {
 			this.currentRole = Number(e.target.value);
 		})
 
-		dataProcess.pull((e) => {
-			if (!e.length) {
-				return
-			}
+		// dataProcess.pull({ user: 123 }, (e) => {
+		// 	if (!e.length) {
+		// 		return
+		// 	}
+		// 	for (const dataItem of e) {
+		// 		this.rendererChessPiece(dataItem)
+		// 	}
+		// })
+
+		this.$root.$on("initChessBoard", (e) => {
 			for (const dataItem of e) {
 				this.rendererChessPiece(dataItem)
-				// console.log(e);
 			}
 		})
 
 		this.$root.$on("pull", (e) => {
+			if (e === "X") {
+				console.log("interrupt");
+				return;
+			}
 			const data = JSON.parse(e)
 			if (data.clear) {
 				d3.selectAll('.pieces').remove()

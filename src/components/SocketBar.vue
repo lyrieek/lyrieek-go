@@ -1,20 +1,15 @@
 <template>
 	<div>
-		<div>
-			<span>ID: </span><span>{{userName}}</span>
-		</div>
 	</div>
 </template>
 <script>
 export default {
 	name: 'SocketBar',
-	props: {
+	data: () => ({
 		userName: String
-	},
+	}),
 	mounted() {
-		const socket = new WebSocket("ws://localhost:1234/")
-		// const socket = new WebSocket("ws://123.207.136.134:9010/ajaxchattest")
-		// socket.send('login:' + this.userName);
+		const socket = new WebSocket("ws://localhost:1212/chat")
 		socket.onopen = () => {
 			this.$root.$on("active", (e) => {
 				socket.send(e)
